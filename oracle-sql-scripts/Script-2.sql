@@ -1,0 +1,100 @@
+--260313
+SELECT
+	*
+FROM
+	EMP
+ORDER BY
+	ENAME;
+
+SELECT
+	*
+FROM
+	EMP
+ORDER BY
+	ENAME DESC;
+
+SELECT
+	*
+FROM
+	EMP
+ORDER BY
+	SAL DESC;
+
+SELECT
+	*
+FROM
+	EMP
+ORDER BY
+	DEPTNO,
+	SAL DESC;
+
+SELECT
+	ENAME,
+	SAL
+FROM
+	EMP
+WHERE
+	DEPTNO = 30
+ORDER BY
+	ENAME;
+
+SELECT
+	JOB AS "직업"
+FROM
+	EMP
+WHERE
+	JOB = 'SALESMAN'
+	AND DEPTNO = 30;
+
+SELECT
+	*
+FROM
+	EMP
+WHERE
+	JOB = 'CLERK'
+	OR DEPTNO = 30;
+
+SELECT
+	ENAME AS "사원이름",
+	(SAL * 12)AS "연봉"
+FROM
+	EMP
+WHERE
+	(SAL * 12) = 36000;
+-- 모든 사원의 이름과 연봉을 출력
+-- 연봉은 내림차순으로 출력
+SELECT
+	ENAME AS "사원이름",
+	(SAL * 12)AS "연봉"
+FROM
+	EMP
+ORDER BY
+	"연봉" DESC;
+
+SELECT
+	ENAME AS "사원이름",
+	(SAL * 12)AS "연봉"
+FROM
+	EMP
+ORDER BY
+	(SAL * 12) DESC;
+--연봉이 3000만원이상인 사람만 출력
+SELECT
+	ENAME AS "사원이름",
+	(SAL * 12)AS "연봉"
+FROM
+	EMP
+WHERE
+	(SAL * 12)>= 30000
+ORDER BY
+	"연봉" DESC;
+
+SELECT
+	ENAME AS "사원이름",
+	(SAL * 12)AS "연봉"
+FROM
+	EMP
+WHERE
+	(SAL * 12)>= 30000
+ORDER BY
+	(SAL * 12) DESC;
