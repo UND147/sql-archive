@@ -1,0 +1,61 @@
+--260407
+--6장 Q3
+SELECT EMPNO 
+      ,ENAME
+      ,TO_CHAR(HIREDATE,'YYYY/MM/DD') AS HIREDATE
+      ,TO_CHAR(NEXT_DAY(ADD_MONTHS(HIREDATE, 3),'월요일'),'YYYY-MM-DD') AS R_JOB
+      ,NVL2(COMM, LTRIM(TO_CHAR(COMM, '9990'), ' '), 'N/A') AS COMM
+FROM EMP;
+--부서별 SAL의 평균 , 출력은 부서번호, 평균값
+SELECT DEPTNO AS "부서번호"
+      ,AVG(SAL) AS "평균값"
+FROM EMP
+GROUP BY DEPTNO
+ORDER BY DEPTNO;
+--각 부서의 직책별 급여의 평균을 구하시오
+SELECT DEPTNO
+      ,JOB
+      ,AVG(SAL)
+FROM EMP
+GROUP BY DEPTNO, JOB
+ORDER BY DEPTNO, JOB;
+--각 부서의 사원 수를 구하시오 = 부서별 
+SELECT DEPTNO AS "부서"
+      ,COUNT(*) AS "사원 수"
+FROM EMP
+GROUP BY DEPTNO
+ORDER BY DEPTNO;
+--부서별 사원의 수가 5를 초과하는 부서번호와 사원 수 출력
+SELECT DEPTNO AS "부서"
+      ,COUNT(*) AS "사원 수"
+FROM EMP
+GROUP BY DEPTNO
+HAVING COUNT(*) > 5
+ORDER BY DEPTNO;
+--급여가 3000이하의 사원에 대해서 각 부서의 직책별 평균 급여가 2000이상인 
+-- 부서번호, 직책, 평균급여를 출력
+SELECT DEPTNO AS "부서번호"
+      ,JOB AS "직책"
+      ,AVG(SAL) AS "평균급여"
+      ,COUNT(*) AS "사원수"
+FROM EMP
+WHERE SAL <= 3000
+GROUP BY DEPTNO, JOB 
+HAVING AVG(SAL) >= 2000
+ORDER BY DEPTNO, JOB;
+-- 각 부서의 매니저들의 평균 급여가 2500이하인 부서번호 출력
+SELECT DEPTNO
+FROM EMP
+WHERE JOB = 'MANAGER'
+GROUP BY DEPTNO
+HAVING AVG(SAL)<=2500;
+
+
+--7장 Q1
+SELECT DEPTNO
+      ,AVG(SAL) AS AVG_SAL
+      ,MAX(SAL) AS MAX_SAL
+      ,MIN(SAL) AS MIN_SAL
+      ,COUNT(*) AS CNT
+FROM EMP
+GROUP BY DEPTNO;
