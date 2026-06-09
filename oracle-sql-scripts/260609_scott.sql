@@ -1,0 +1,4 @@
+--SCOTT
+
+--USER_AA로부터 SELECT 객체권한 부여받음
+SELECT * FROM USER_AA.TABLE_AA;
