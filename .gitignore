@@ -1,0 +1,18 @@
+# DBeaver / IDE 프로젝트 설정
+.project
+.settings/
+
+# DB 접속 정보 (보안)
+.render/
+Credentials/
+DataSource.json
+
+# 다이어그램·임시
+*.erd
+*.log
+bin/
+temp/
+
+# OS
+Thumbs.db
+.DS_Store
