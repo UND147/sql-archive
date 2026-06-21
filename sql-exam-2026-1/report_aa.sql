@@ -1,0 +1,67 @@
+--REPORT
+DROP TABLE "tblDuicaDept";
+--1) 두 테이블 생성
+
+CREATE TABLE "tblDuicaDept"(
+	DEPTNO NUMBER(2,0) CONSTRAINT tblDuicaDept_DEPTNO_PK PRIMARY KEY,
+	DNAME VARCHAR(16) CONSTRAINT tblDuicaDept_DNAME_NN NOT NULL
+);
+
+CREATE TABLE "tblDuicaSt"(
+	SNO NUMBER(8,0) CONSTRAINT tblDuicaSt_SNO_PK PRIMARY KEY,
+	SNAME VARCHAR(8) CONSTRAINT StblDuicaSt_SNAME_NN NOT NULL,
+	HIREDATE DATE CONSTRAINT tblDuicaSt_HIREDATE_NN NOT NULL,
+	MAJOR NUMBER(2, 0) CONSTRAINT tblDuicaSt_MAJOR_FK REFERENCES "tblDuicaDept"(DEPTNO)
+);
+
+SELECT *
+FROM "tblDuicaDept";
+
+SELECT *
+FROM "tblDuicaSt";
+
+--2) dept에 (10, '컴퓨터공학전공') insert
+
+INSERT INTO "tblDuicaDept" (DEPTNO, DNAME)
+VALUES (10, '컴퓨터공학전공');
+
+--3) st에 본인의 정보를 insert
+
+ALTER TABLE "tblDuicaSt" 
+MODIFY SNO NUMBER(9,0);
+
+INSERT INTO "tblDuicaSt" (SNO, SNAME, HIREDATE, MAJOR)
+VALUES (225230001, '정주호', TO_DATE('2025-09-01', 'YYYY-MM-DD'),10);
+
+--4) 2,3번 수행된 결과를 확인하는 결과 화면
+
+SELECT DEPTNO, DNAME
+FROM "tblDuicaDept";
+
+SELECT TO_CHAR(SNO) AS SNO, SNAME, HIREDATE, MAJOR
+FROM "tblDuicaSt";
+
+--5) st 테이블에 저장된 본인의 정보 중에서 이름을 '홍길동'으로 변경
+
+UPDATE "tblDuicaSt"
+SET SNAME = '홍길동'
+WHERE SNO = 225230001;
+
+--6) 5번 수행 결과 화면
+
+SELECT TO_CHAR(SNO) AS SNO, SNAME, HIREDATE, MAJOR
+FROM "tblDuicaSt"
+WHERE SNO = 225230001;
+
+--또는
+
+SELECT TO_CHAR(SNO) AS SNO, SNAME, HIREDATE, MAJOR
+FROM "tblDuicaSt"
+WHERE SNAME = '홍길동';
+
+--7) 두 개의 테이블에 설정된 제약조건 만을 확인하는 SQL
+SELECT *
+FROM SYS.USER_CONSTRAINTS
+WHERE TABLE_NAME IN ('tblDuicaSt', 'tblDuicaDept');
+SELECT *
+FROM SYS.USER_CONSTRAINTS;
