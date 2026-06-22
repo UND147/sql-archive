@@ -30,6 +30,3 @@ sql-exam-2026-1/
 ├── [AA]...과제.pdf               # 과제 보고서 (제출본)
 └── README.md
 ```
-
-## 실행
-Oracle 환경(SQL*Plus / SQL Developer / DBeaver)에서 스크립트를 순서대로 실행합니다.
